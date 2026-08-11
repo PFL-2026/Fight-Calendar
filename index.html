@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Fight Calendar — Boxing &amp; MMA</title>
+<meta name="description" content="Upcoming boxing and MMA cards by promoter, updated daily.">
+<meta name="theme-color" content="#101317">
+<link rel="icon" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Fight Cal">
+<meta name="format-detection" content="telephone=no">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#101317;--slate:#171C23;--slate-2:#1E242C;--line:#2A313B;
+  --bone:#F2F0EB;--muted:#8B95A3;--red:#E23A2E;--blue:#3B86EE;--gold:#E8B33A;
+  --display:"Barlow Condensed","Haettenschweiler","Arial Narrow",sans-serif;
+  --body:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--ink);color:var(--bone);font-family:var(--body);
+  font-size:15px;line-height:1.5;-webkit-text-size-adjust:100%;
+  -webkit-tap-highlight-color:rgba(232,179,58,.18);overscroll-behavior-y:contain;
+  padding:env(safe-area-inset-top) env(safe-area-inset-right)
+          calc(64px + env(safe-area-inset-bottom)) env(safe-area-inset-left);
+}
+a{color:inherit}
+code{font-family:var(--mono);font-size:.92em;color:var(--bone)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+.masthead{border-bottom:1px solid var(--line);padding:32px 0 22px;margin-bottom:22px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.eyebrow .live{color:var(--gold)}.eyebrow .stale{color:var(--red)}
+h1{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.01em;font-size:clamp(40px,9vw,76px);line-height:.9;margin:0}
+h1 .split{color:var(--muted)}
+.standfirst{margin:14px 0 0;max-width:52ch;color:var(--muted);font-size:14px}
+
+.controls{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;padding-bottom:20px;border-bottom:1px solid var(--line);margin-bottom:20px}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field label{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+select{
+  appearance:none;-webkit-appearance:none;
+  background:var(--slate) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8'><path d='M1 1l5 5 5-5' fill='none' stroke='%238B95A3' stroke-width='1.6'/></svg>") no-repeat right 12px center;
+  border:1px solid var(--line);color:var(--bone);font-family:var(--display);font-size:19px;
+  font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:9px 38px 9px 13px;
+  border-radius:2px;min-width:200px;cursor:pointer;
+}
+select:focus-visible,button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.refbar{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.reflink{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-decoration:none;color:var(--muted);border:1px solid var(--line);border-radius:2px;padding:8px 11px;white-space:nowrap;transition:color .15s,border-color .15s}
+.reflink:hover{color:var(--bone);border-color:var(--muted)}
+.reflink span{color:var(--gold)}
+
+.monthbar{display:flex;align-items:center;gap:10px;margin-bottom:24px}
+.navbtn{background:transparent;border:1px solid var(--line);color:var(--bone);width:36px;height:36px;flex:0 0 36px;border-radius:2px;cursor:pointer;font-size:16px;line-height:1;display:grid;place-items:center}
+.navbtn:hover:not(:disabled){border-color:var(--muted)}
+.navbtn:disabled{opacity:.28;cursor:not-allowed}
+.rail{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.rail::-webkit-scrollbar{display:none}
+.mpill{background:transparent;border:1px solid var(--line);color:var(--muted);font-family:var(--display);font-size:19px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:7px 14px;border-radius:2px;cursor:pointer;white-space:nowrap;display:flex;align-items:baseline;gap:8px;transition:color .15s,border-color .15s,background .15s}
+.mpill:hover{color:var(--bone);border-color:var(--muted)}
+.mpill .n{font-family:var(--mono);font-size:10px;font-weight:500;color:var(--muted)}
+.mpill[aria-pressed="true"]{background:var(--bone);border-color:var(--bone);color:var(--ink)}
+.mpill[aria-pressed="true"] .n{color:var(--ink);opacity:.55}
+
+.gridhead{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.gridhead div{padding:0 6px}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:2px;overflow:hidden;margin-bottom:36px}
+.cell{background:var(--ink);min-height:74px;padding:6px 6px 8px;display:flex;flex-direction:column;gap:5px}
+.cell.out{background:#0C0F12}
+.cell .dnum{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.cell.out .dnum{opacity:.3}
+.cell.today .dnum{color:var(--ink);background:var(--gold);border-radius:2px;padding:0 4px;align-self:flex-start;font-weight:600}
+.cell.has{background:var(--slate);cursor:pointer}
+.cell.has:hover{background:var(--slate-2)}
+.chip{font-family:var(--display);font-size:13px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;line-height:1.15;padding:2px 5px;border-radius:2px;border-left:3px solid var(--c);background:rgba(255,255,255,.05);color:var(--bone);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.more{font-family:var(--mono);font-size:9px;color:var(--muted);padding-left:2px}
+
+.daygroup{margin-bottom:28px;scroll-margin-top:16px}
+.dayline{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--line);padding-bottom:6px;margin-bottom:12px}
+.daydate{font-family:var(--display);font-size:27px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1}
+.dayrel{font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:auto}
+.event{display:grid;grid-template-columns:92px 1fr;gap:16px;align-items:start;background:var(--slate);border:1px solid var(--line);border-left:4px solid var(--c);border-radius:2px;padding:14px 16px;margin-bottom:8px}
+.badge{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;width:92px;min-height:66px;padding:9px 6px;border-radius:3px;background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid var(--line);border-top:2px solid var(--pc);text-align:center}
+.badge .mark{font-family:var(--display);font-size:26px;font-weight:700;line-height:.85;letter-spacing:.02em;text-transform:uppercase;color:var(--pc)}
+.badge .mark.long{font-size:19px}
+.badge .full{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);line-height:1.2}
+.badge img{max-width:100%;max-height:46px;object-fit:contain;display:block}
+.badge .code{font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--c)}
+.ebody h3{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:24px;line-height:1.02;letter-spacing:.01em;margin:0 0 4px}
+.bout{font-size:14px;margin:0 0 8px}
+.bout .vs{color:var(--muted);font-size:12px;padding:0 4px}
+.meta{font-family:var(--mono);font-size:11px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 10px;margin-bottom:10px;line-height:1.5}
+.meta .tag{color:var(--gold)}
+.links{display:flex;flex-wrap:wrap;gap:6px}
+.links a{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-decoration:none;color:var(--muted);border:1px solid var(--line);border-radius:2px;padding:5px 9px;transition:color .15s,border-color .15s}
+.links a:hover{color:var(--bone);border-color:var(--muted)}
+.links a::after{content:" ↗";opacity:.5}
+
+.empty{border:1px dashed var(--line);border-radius:2px;padding:28px 22px;color:var(--muted);font-size:14px}
+.empty strong{display:block;font-family:var(--display);font-size:24px;font-weight:600;text-transform:uppercase;letter-spacing:.03em;color:var(--bone);margin-bottom:6px}
+.empty a{color:var(--gold)}
+footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;font-family:var(--mono);font-size:11px;line-height:1.7;color:var(--muted)}
+footer a{color:var(--muted)}
+footer strong{color:var(--bone);font-weight:500}
+
+@media (max-width:720px){
+  .wrap{padding:0 14px}
+  select{min-width:0;width:100%;font-size:17px}
+  .field{flex:1 1 100%}
+  /* Two short filters share a row; the promoter list needs the full width. */
+  .field:first-of-type,#fCountry{flex:1 1 calc(50% - 6px)}
+  .field:first-of-type{order:1}#fCountry{order:2}
+  .field:nth-of-type(2){order:3}.refbar{order:4}
+  .refbar{margin-left:0;flex:1 1 100%}
+  .reflink{flex:1 1 auto;text-align:center}
+  .cell{min-height:56px;padding:4px}
+  .chip{font-size:0;padding:0;height:5px;border-left:none;background:var(--c);border-radius:1px}
+  .more{display:none}
+  .gridhead div{padding:0 2px}
+  .event{grid-template-columns:60px 1fr;gap:12px}
+  .badge{width:60px;min-height:52px;padding:7px 4px}
+  .badge .mark{font-size:19px}.badge .mark.long{font-size:13px}
+  .badge .full{display:none}.badge img{max-height:34px}
+  .ebody h3{font-size:21px}
+}
+@media (display-mode:standalone){
+  .masthead{padding-top:calc(18px + env(safe-area-inset-top))}
+  .controls{position:sticky;top:calc(-1px + env(safe-area-inset-top));z-index:20;background:var(--ink);padding-top:12px;margin-top:-12px}
+}
+@media (pointer:coarse){
+  select{min-height:44px}
+  .navbtn{width:44px;height:44px;flex:0 0 44px;font-size:18px}
+  .mpill{min-height:44px;padding:9px 16px}
+  .reflink{min-height:40px;display:flex;align-items:center;justify-content:center}
+  .links a{min-height:36px;display:inline-flex;align-items:center}
+  .cell.has{min-height:62px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <p class="eyebrow" id="eyebrow">Loading schedule…</p>
+    <h1>Fight Calendar <span class="split">/</span> <span id="yearLabel">2026</span></h1>
+    <p class="standfirst">Boxing and MMA dates in one place. Pick a sport, then a promoter, then scroll the months. Every card links out to the promoter and to BoxRec or Tapology.</p>
+  </header>
+
+  <div class="controls">
+    <div class="field">
+      <label for="sport">Sport</label>
+      <select id="sport">
+        <option value="ALL">Boxing &amp; MMA</option>
+        <option value="Boxing">Boxing</option>
+        <option value="MMA">MMA</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="promo">Promoter</label>
+      <select id="promo"></select>
+    </div>
+    <div class="field" id="fCountry">
+      <label for="country">Location</label>
+      <select id="country"></select>
+    </div>
+    <div class="refbar" id="refbar"></div>
+  </div>
+
+  <div class="monthbar">
+    <button class="navbtn" id="prev" aria-label="Previous month">‹</button>
+    <div class="rail" id="rail"></div>
+    <button class="navbtn" id="next" aria-label="Next month">›</button>
+  </div>
+
+  <div class="gridhead" aria-hidden="true">
+    <div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>
+  </div>
+  <div class="grid" id="grid"></div>
+  <div id="list" aria-live="polite"></div>
+
+  <footer>
+    <p><strong>Where the dates come from.</strong> A scheduled job rebuilds <code>data.json</code> every morning from promoter sites and Wikipedia's event tables, so new and amended fixtures appear without anyone editing the page. BoxRec and Tapology have no open feed and their terms don't permit scraping, so they're used as outbound reference links rather than as inputs.</p>
+    <p><strong>Boxing</strong> covers Queensberry, Matchroom, BOXXER, Misfits and MVP. <strong>MMA</strong> covers UFC, PFL, ONE, Cage Warriors, RIZIN and Oktagon.</p>
+    <p>Reference hubs: <a href="https://boxrec.com/en/schedule" target="_blank" rel="noopener">BoxRec schedule</a> · <a href="https://www.tapology.com/fightcenter" target="_blank" rel="noopener">Tapology Fightcenter</a></p>
+  </footer>
+</div>
+
+<script>
+const DOW=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+const MNAME=["January","February","March","April","May","June","July","August","September","October","November","December"];
+const SHORT=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+const corner=s=>s==="Boxing"?"var(--red)":"var(--blue)";
+
+const d0=new Date();
+const TODAY=`${d0.getFullYear()}-${String(d0.getMonth()+1).padStart(2,"0")}-${String(d0.getDate()).padStart(2,"0")}`;
+
+let PROMOTERS={},EVENTS=[],DORMANT={},FLAGS={},MONTHS=[],logoCache={};
+const state={sport:"ALL",promo:"ALL",country:"ALL",month:0};
+const flag=c=>FLAGS[c]||"";
+
+async function boot(){
+  let d;
+  try{ d=await (await fetch("data.json",{cache:"no-cache"})).json(); }
+  catch(err){
+    console.error(err);
+    $("eyebrow").innerHTML=`<span class="stale">Couldn't load the schedule.</span>`;
+    $("list").innerHTML=`<div class="empty"><strong>Schedule unavailable</strong><code>data.json</code> didn't load. If you opened this file directly from your desktop, browsers block that — push it to GitHub Pages, or run <code>npx serve</code> in the folder.</div>`;
+    return;
+  }
+  PROMOTERS=d.promoters||{};
+  EVENTS=(d.events||[]).filter(e=>e.date>=TODAY).sort((a,b)=>a.date.localeCompare(b.date)||a.promoter.localeCompare(b.promoter));
+  DORMANT=d.dormant||{};FLAGS=d.flags||{};
+  stamp(d.generatedAt);
+
+  MONTHS=[...new Set(EVENTS.map(e=>e.date.slice(0,7)))].sort();
+  if(!MONTHS.length)MONTHS=[TODAY.slice(0,7)];
+  state.month=Math.max(0,MONTHS.indexOf(TODAY.slice(0,7)));
+  $("yearLabel").textContent=[...new Set(MONTHS.map(m=>m.slice(0,4)))].join("–");
+
+  preloadLogos();buildPromoSelect();buildCountrySelect();buildRefbar();render();wire();
+}
+
+function stamp(iso){
+  const el=$("eyebrow");
+  if(!iso){el.textContent=`${EVENTS.length} announced cards`;return;}
+  const when=new Date(iso),fresh=(Date.now()-when.getTime())/36e5<48;
+  el.innerHTML=`${EVENTS.length} announced cards · <span class="${fresh?"live":"stale"}">Updated ${esc(when.toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"}))}</span>`+(fresh?"":" · the daily job may have failed, check the Actions tab");
+}
+
+/* Swap the typographic badge for logo-<slug>.svg|png when the file exists. */
+function preloadLogos(){
+  Object.values(PROMOTERS).forEach(p=>["svg","png"].forEach(ext=>{
+    const url=`logo-${p.slug}.${ext}`,img=new Image();
+    img.onload=()=>{if(!logoCache[p.slug]){logoCache[p.slug]=url;buildList();}};
+    img.src=url;
+  }));
+}
+
+const matches=e=>(state.sport==="ALL"||e.sport===state.sport)
+  &&(state.promo==="ALL"||e.promoter===state.promo)
+  &&(state.country==="ALL"||e.country===state.country);
+const filtered=()=>EVENTS.filter(matches);
+
+function buildPromoSelect(){
+  const names=Object.keys(PROMOTERS).filter(n=>state.sport==="ALL"||PROMOTERS[n].sport===state.sport);
+  if(!names.includes(state.promo))state.promo="ALL";
+  $("promo").innerHTML=`<option value="ALL">All promoters</option>`+names.map(n=>`<option value="${esc(n)}"${n===state.promo?" selected":""}>${esc(n)}</option>`).join("");
+}
+
+/* Countries reflect the sport + promoter already chosen, so you can never
+   pick a combination with nothing in it. */
+function buildCountrySelect(){
+  const pool=EVENTS.filter(e=>(state.sport==="ALL"||e.sport===state.sport)&&(state.promo==="ALL"||e.promoter===state.promo));
+  const counts={};
+  pool.forEach(e=>counts[e.country]=(counts[e.country]||0)+1);
+  const names=Object.keys(counts).sort((a,b)=>a.localeCompare(b));
+  if(!names.includes(state.country))state.country="ALL";
+  $("country").innerHTML=`<option value="ALL">All locations</option>`
+    +names.map(n=>`<option value="${esc(n)}"${n===state.country?" selected":""}>${flag(n)} ${esc(n)} (${counts[n]})</option>`).join("");
+}
+
+function buildRefbar(){
+  $("refbar").innerHTML = state.promo==="ALL"
+    ? `<a class="reflink" href="https://boxrec.com/en/schedule" target="_blank" rel="noopener"><span>BoxRec</span> schedule</a><a class="reflink" href="https://www.tapology.com/fightcenter" target="_blank" rel="noopener"><span>Tapology</span> fightcenter</a>`
+    : (PROMOTERS[state.promo].refs||[]).map(([l,u])=>`<a class="reflink" href="${esc(u)}" target="_blank" rel="noopener"><span>${esc(state.promo)}</span> on ${esc(l)}</a>`).join("");
+}
+
+function buildRail(){
+  const evs=filtered();
+  $("rail").innerHTML=MONTHS.map((m,i)=>{
+    const n=evs.filter(e=>e.date.startsWith(m)).length;
+    return `<button class="mpill" data-i="${i}" aria-pressed="${i===state.month}">${SHORT[+m.slice(5)-1]}<span class="n">${n}</span></button>`;
+  }).join("");
+  $("rail").querySelectorAll(".mpill").forEach(b=>b.onclick=()=>{state.month=+b.dataset.i;render();});
+  $("prev").disabled=state.month===0;
+  $("next").disabled=state.month===MONTHS.length-1;
+  $("rail").querySelector('[aria-pressed="true"]')?.scrollIntoView({block:"nearest",inline:"center",behavior:"smooth"});
+}
+
+function buildGrid(){
+  const m=MONTHS[state.month],[y,mo]=m.split("-").map(Number);
+  const days=new Date(Date.UTC(y,mo,0)).getUTCDate();
+  const lead=(new Date(Date.UTC(y,mo-1,1)).getUTCDay()+6)%7;
+  const byDay={};
+  filtered().filter(e=>e.date.startsWith(m)).forEach(e=>(byDay[+e.date.slice(8)]||=[]).push(e));
+  let h="";
+  for(let i=0;i<lead;i++)h+=`<div class="cell out"><span class="dnum"></span></div>`;
+  for(let d=1;d<=days;d++){
+    const iso=`${m}-${String(d).padStart(2,"0")}`,list=byDay[d]||[];
+    const cls=["cell",list.length?"has":"",iso===TODAY?"today":""].filter(Boolean).join(" ");
+    const chips=list.slice(0,2).map(e=>`<span class="chip" style="--c:${corner(e.sport)}">${esc(e.promoter)}</span>`).join("");
+    const extra=list.length>2?`<span class="more">+${list.length-2} more</span>`:"";
+    const attrs=list.length?` data-iso="${iso}" role="button" tabindex="0" aria-label="${list.length} event${list.length>1?"s":""} on ${d} ${MNAME[mo-1]}"`:"";
+    h+=`<div class="${cls}"${attrs}><span class="dnum">${d}</span>${chips}${extra}</div>`;
+  }
+  const tail=(7-((lead+days)%7))%7;
+  for(let i=0;i<tail;i++)h+=`<div class="cell out"><span class="dnum"></span></div>`;
+  $("grid").innerHTML=h;
+  $("grid").querySelectorAll("[data-iso]").forEach(c=>{
+    const jump=()=>$("d-"+c.dataset.iso)?.scrollIntoView({behavior:"smooth",block:"start"});
+    c.onclick=jump;
+    c.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();jump();}};
+  });
+}
+
+function relative(iso){
+  const diff=Math.round((Date.parse(iso+"T00:00:00")-Date.parse(TODAY+"T00:00:00"))/864e5);
+  if(diff<=0)return"today";
+  if(diff===1)return"tomorrow";
+  if(diff<7)return`in ${diff} days`;
+  const w=Math.round(diff/7);
+  return`in ${w} week${w>1?"s":""}`;
+}
+
+function badge(e){
+  const p=PROMOTERS[e.promoter]||{mark:e.promoter.slice(0,3),accent:"var(--muted)",slug:"x"};
+  const logo=logoCache[p.slug];
+  const inner=logo
+    ?`<img src="${esc(logo)}" alt="${esc(e.promoter)}">`
+    :`<span class="mark${(p.mark||"").length>3?" long":""}">${esc(p.mark)}</span><span class="full">${esc(e.promoter)}</span>`;
+  return`<div class="badge" style="--pc:${esc(p.accent)}" title="${esc(e.promoter)}">${inner}<span class="code">${e.sport==="Boxing"?"Box":"MMA"}</span></div>`;
+}
+
+function buildList(){
+  const m=MONTHS[state.month],mi=+m.slice(5)-1;
+  const evs=filtered().filter(e=>e.date.startsWith(m)),box=$("list");
+  if(!evs.length){
+    const bits=[state.promo!=="ALL"?state.promo:(state.sport!=="ALL"?state.sport:null),
+                state.country!=="ALL"?`in ${state.country}`:null].filter(Boolean);
+    const who=bits.join(" ");
+    const hint=(state.country!=="ALL")?`Nothing in ${esc(state.country)} that month. Try another month, or set Location back to all.`
+      :(state.promo!=="ALL"&&DORMANT[state.promo])?esc(DORMANT[state.promo]):`Nothing announced for ${MNAME[mi]} yet. Try another month, or widen the filter.`;
+    const ref=state.promo!=="ALL"&&PROMOTERS[state.promo]?.refs?.[0];
+    const link=ref?`<p style="margin:10px 0 0">Check <a href="${esc(ref[1])}" target="_blank" rel="noopener">${esc(state.promo)} on ${esc(ref[0])}</a> for new dates.</p>`:"";
+    box.innerHTML=`<div class="empty"><strong>No cards${who?` for ${esc(who)}`:""} in ${MNAME[mi]}</strong>${hint}${link}</div>`;
+    return;
+  }
+  const groups={};
+  evs.forEach(e=>(groups[e.date]||=[]).push(e));
+  box.innerHTML=Object.keys(groups).sort().map(iso=>{
+    const dt=new Date(Date.parse(iso+"T00:00:00"));
+    const rows=groups[iso].map(e=>`
+      <article class="event" style="--c:${corner(e.sport)}">
+        ${badge(e)}
+        <div class="ebody">
+          <h3>${esc(e.title)}</h3>
+          <p class="bout">${esc(e.bout?.[0]||"TBA")}<span class="vs">vs</span>${esc(e.bout?.[1]||"TBA")}</p>
+          <div class="meta">
+            <span>${flag(e.country)} ${esc(e.venue)}${e.city?", "+esc(e.city):""}</span>
+            ${e.broadcast?`<span>·</span><span>${esc(e.broadcast)}</span>`:""}
+            ${e.tag?`<span>·</span><span class="tag">${esc(e.tag)}</span>`:""}
+          </div>
+          <div class="links">${(e.links||[]).map(([l,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(l)}</a>`).join("")}</div>
+        </div>
+      </article>`).join("");
+    return`<section class="daygroup" id="d-${iso}"><div class="dayline"><span class="daydate">${DOW[dt.getDay()]} ${+iso.slice(8)} ${MNAME[mi]}</span><span class="dayrel">${relative(iso)}</span></div>${rows}</section>`;
+  }).join("");
+}
+
+function render(){buildRail();buildGrid();buildList();}
+
+function wire(){
+  $("sport").onchange=e=>{state.sport=e.target.value;buildPromoSelect();buildCountrySelect();buildRefbar();state.month=Math.min(state.month,MONTHS.length-1);render();};
+  $("promo").onchange=e=>{state.promo=e.target.value;buildCountrySelect();buildRefbar();render();};
+  $("country").onchange=e=>{state.country=e.target.value;render();};
+  $("prev").onclick=()=>{if(state.month>0){state.month--;render();}};
+  $("next").onclick=()=>{if(state.month<MONTHS.length-1){state.month++;render();}};
+}
+
+boot();
+if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+</script>
+</body>
+</html>

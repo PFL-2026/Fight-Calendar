@@ -1,0 +1,1377 @@
+{
+ "generatedAt": "2026-08-11T00:00:00Z",
+ "source": "seed (hand-verified)",
+ "staleSources": [],
+ "promoters": {
+  "Queensberry": {
+   "slug": "queensberry",
+   "sport": "Boxing",
+   "mark": "QB",
+   "accent": "#E0483C",
+   "refs": [
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter/promotions/2574-queensbury-promotions-qp"
+    ],
+    [
+     "BoxRec",
+     "https://boxrec.com/en/schedule"
+    ],
+    [
+     "Queensberry",
+     "https://queensberry.co.uk/pages/events"
+    ]
+   ],
+   "sources": [
+    "queensberry"
+   ]
+  },
+  "Matchroom": {
+   "slug": "matchroom",
+   "sport": "Boxing",
+   "mark": "MR",
+   "accent": "#4FA8E8",
+   "refs": [
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter/promotions/2484-matchroom-boxing-mb"
+    ],
+    [
+     "BoxRec",
+     "https://boxrec.com/en/schedule"
+    ],
+    [
+     "Matchroom",
+     "https://www.matchroomboxing.com/events/"
+    ]
+   ],
+   "sources": [
+    "matchroom"
+   ]
+  },
+  "BOXXER": {
+   "slug": "boxxer",
+   "sport": "Boxing",
+   "mark": "BXR",
+   "accent": "#E8B33A",
+   "refs": [
+    [
+     "BoxRec",
+     "https://boxrec.com/en/promoter/892158"
+    ],
+    [
+     "BOXXER",
+     "https://www.boxxer.com/tickets/"
+    ]
+   ],
+   "sources": [
+    "boxxer"
+   ]
+  },
+  "Misfits": {
+   "slug": "misfits",
+   "sport": "Boxing",
+   "mark": "MF",
+   "accent": "#C56BE8",
+   "refs": [
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter/promotions/4502-misfits-boxing-mf"
+    ],
+    [
+     "BoxRec",
+     "https://boxrec.com/en/schedule"
+    ],
+    [
+     "Wikipedia",
+     "https://en.wikipedia.org/wiki/2026_in_Misfits_Boxing_and_MF_Pro"
+    ]
+   ],
+   "sources": [
+    "wikipedia:2026_in_Misfits_Boxing_and_MF_Pro"
+   ]
+  },
+  "MVP": {
+   "slug": "mvp",
+   "sport": "Boxing",
+   "mark": "MVP",
+   "accent": "#58C98A",
+   "refs": [
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter/promotions/4040-most-valuable-promotions-mvp"
+    ],
+    [
+     "BoxRec",
+     "https://boxrec.com/en/schedule"
+    ],
+    [
+     "MVP",
+     "https://www.mostvaluablepromotions.com/events/"
+    ]
+   ],
+   "sources": [
+    "mvp"
+   ]
+  },
+  "UFC": {
+   "slug": "ufc",
+   "sport": "MMA",
+   "mark": "UFC",
+   "accent": "#E8564A",
+   "refs": [
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ],
+    [
+     "Wikipedia",
+     "https://en.wikipedia.org/wiki/List_of_UFC_events"
+    ]
+   ],
+   "sources": [
+    "wikipedia:List_of_UFC_events"
+   ]
+  },
+  "PFL": {
+   "slug": "pfl",
+   "sport": "MMA",
+   "mark": "PFL",
+   "accent": "#F0A93B",
+   "refs": [
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter/promotions/1969-professional-fighters-league-pfl"
+    ],
+    [
+     "Wikipedia",
+     "https://en.wikipedia.org/wiki/2026_in_Professional_Fighters_League"
+    ]
+   ],
+   "sources": [
+    "wikipedia:2026_in_Professional_Fighters_League"
+   ]
+  },
+  "ONE": {
+   "slug": "one",
+   "sport": "MMA",
+   "mark": "ONE",
+   "accent": "#5B8DEF",
+   "refs": [
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ],
+    [
+     "Wikipedia",
+     "https://en.wikipedia.org/wiki/List_of_ONE_Championship_events"
+    ]
+   ],
+   "sources": [
+    "wikipedia:List_of_ONE_Championship_events"
+   ]
+  },
+  "Cage Warriors": {
+   "slug": "cagewarriors",
+   "sport": "MMA",
+   "mark": "CW",
+   "accent": "#8FD14F",
+   "refs": [
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ],
+    [
+     "Cage Warriors",
+     "https://cagewarriors.com/cage-warriors-events/"
+    ]
+   ],
+   "sources": [
+    "cagewarriors",
+    "wikipedia:2026_in_Cage_Warriors"
+   ]
+  },
+  "RIZIN": {
+   "slug": "rizin",
+   "sport": "MMA",
+   "mark": "RIZIN",
+   "accent": "#EF5B8C",
+   "refs": [
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ],
+    [
+     "Wikipedia",
+     "https://en.wikipedia.org/wiki/2026_in_Rizin_Fighting_Federation"
+    ]
+   ],
+   "sources": [
+    "wikipedia:2026_in_Rizin_Fighting_Federation"
+   ]
+  },
+  "Oktagon": {
+   "slug": "oktagon",
+   "sport": "MMA",
+   "mark": "OKT",
+   "accent": "#4FD1C5",
+   "refs": [
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ],
+    [
+     "Oktagon",
+     "https://oktagonmma.com/en/events/"
+    ],
+    [
+     "Wikipedia",
+     "https://en.wikipedia.org/wiki/2026_in_Oktagon_MMA"
+    ]
+   ],
+   "sources": [
+    "oktagon",
+    "wikipedia:2026_in_Oktagon_MMA"
+   ]
+  }
+ },
+ "events": [
+  {
+   "date": "2026-08-11",
+   "sport": "MMA",
+   "promoter": "RIZIN",
+   "title": "RIZIN 54",
+   "bout": [
+    "Kleber Koike Erbst",
+    "Kyoma Akimoto"
+   ],
+   "tag": "RIZIN Japan GP heavyweight semi-finals on the card",
+   "venue": "Toyota Arena Tokyo",
+   "city": "Kōtō, Tokyo, Japan",
+   "broadcast": "RIZIN TV",
+   "links": [
+    [
+     "Wikipedia",
+     "https://en.wikipedia.org/wiki/2026_in_Rizin_Fighting_Federation"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "Japan"
+  },
+  {
+   "date": "2026-08-12",
+   "sport": "Boxing",
+   "promoter": "Matchroom",
+   "title": "Teremoana vs Savage",
+   "bout": [
+    "Teremoana Teremoana",
+    "DeAndre Savage"
+   ],
+   "venue": "The Star",
+   "city": "Gold Coast, Australia",
+   "broadcast": "DAZN",
+   "links": [
+    [
+     "Matchroom",
+     "https://www.matchroomboxing.com/events/teremoana-vs-savage/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter/promotions/2484-matchroom-boxing-mb"
+    ]
+   ],
+   "country": "Australia"
+  },
+  {
+   "date": "2026-08-15",
+   "sport": "MMA",
+   "promoter": "UFC",
+   "title": "UFC 330",
+   "bout": [
+    "Islam Makhachev",
+    "Ian Machado Garry"
+   ],
+   "tag": "Lightweight title",
+   "venue": "Xfinity Mobile Arena",
+   "city": "Philadelphia, PA",
+   "broadcast": "Paramount+",
+   "links": [
+    [
+     "Schedule",
+     "https://www.paramountplus.com/sneak-peak/ufc-schedule-2026/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "United States"
+  },
+  {
+   "date": "2026-08-21",
+   "sport": "Boxing",
+   "promoter": "MVP",
+   "title": "Serrano vs Manzur",
+   "bout": [
+    "Amanda Serrano",
+    "Lucrecia Manzur"
+   ],
+   "tag": "WBA & WBO featherweight titles",
+   "venue": "Pechanga Resort Casino",
+   "city": "Temecula, CA",
+   "broadcast": "TikTok LIVE",
+   "links": [
+    [
+     "MVP",
+     "https://www.mostvaluablepromotions.com/event/serrano-vs-manzur/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter/promotions/4040-most-valuable-promotions-mvp"
+    ]
+   ],
+   "country": "United States"
+  },
+  {
+   "date": "2026-08-22",
+   "sport": "Boxing",
+   "promoter": "Matchroom",
+   "title": "Liddard vs Morello",
+   "bout": [
+    "George Liddard",
+    "Dario Morello"
+   ],
+   "tag": "European middleweight title",
+   "venue": "York Hall, Bethnal Green",
+   "city": "London, UK",
+   "broadcast": "DAZN",
+   "links": [
+    [
+     "Matchroom",
+     "https://www.matchroomboxing.com/events/liddard-vs-morello/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter/promotions/2484-matchroom-boxing-mb"
+    ]
+   ],
+   "country": "United Kingdom"
+  },
+  {
+   "date": "2026-08-22",
+   "sport": "MMA",
+   "promoter": "PFL",
+   "title": "PFL Tampa",
+   "bout": [
+    "Cris Cyborg",
+    "Ketlen Vieira"
+   ],
+   "tag": "Women's featherweight title — Cyborg's final MMA fight",
+   "venue": "Benchmark International Arena",
+   "city": "Tampa, FL",
+   "broadcast": "ESPN",
+   "links": [
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter/events/145227-pfl-tampa-cyborg-vs-vieira"
+    ],
+    [
+     "Wikipedia",
+     "https://en.wikipedia.org/wiki/PFL_Tampa:_Cyborg_vs._Vieira"
+    ]
+   ],
+   "country": "United States"
+  },
+  {
+   "date": "2026-08-22",
+   "sport": "MMA",
+   "promoter": "UFC",
+   "title": "UFC Fight Night",
+   "bout": [
+    "Anthony Hernandez",
+    "Gregory Rodrigues"
+   ],
+   "venue": "Golden 1 Center",
+   "city": "Sacramento, CA",
+   "broadcast": "Paramount+",
+   "links": [
+    [
+     "Schedule",
+     "https://www.paramountplus.com/sneak-peak/ufc-schedule-2026/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "United States"
+  },
+  {
+   "date": "2026-08-28",
+   "sport": "Boxing",
+   "promoter": "Matchroom",
+   "title": "Marksman vs Barreto",
+   "bout": [
+    "Corey Marksman",
+    "Christian Barreto"
+   ],
+   "venue": "Caribe Royale",
+   "city": "Orlando, FL",
+   "broadcast": "DAZN",
+   "links": [
+    [
+     "Matchroom",
+     "https://www.matchroomboxing.com/events/marksman-vs-barreto/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter/promotions/2484-matchroom-boxing-mb"
+    ]
+   ],
+   "country": "United States"
+  },
+  {
+   "date": "2026-08-29",
+   "sport": "Boxing",
+   "promoter": "Queensberry",
+   "title": "Natural Born Thriller",
+   "bout": [
+    "Moses Itauma",
+    "Filip Hrgović"
+   ],
+   "tag": "Heavyweight headliner",
+   "venue": "The O2 Arena",
+   "city": "London, UK",
+   "broadcast": "DAZN",
+   "links": [
+    [
+     "Queensberry",
+     "https://queensberry.co.uk/pages/moses-itauma-vs-filip-hrgovic-natural-born-thriller"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter/promotions/2574-queensbury-promotions-qp"
+    ]
+   ],
+   "country": "United Kingdom"
+  },
+  {
+   "date": "2026-08-29",
+   "sport": "Boxing",
+   "promoter": "MVP",
+   "title": "MVPW 06 — UK vs USA",
+   "bout": [
+    "Mikaela Mayer",
+    "Chantelle Cameron"
+   ],
+   "tag": "Junior middleweight unification",
+   "venue": "bp pulse LIVE",
+   "city": "Birmingham, UK",
+   "broadcast": "Sky Sports / ESPN+",
+   "links": [
+    [
+     "MVP",
+     "https://www.mostvaluablepromotions.com/event/mvpw-06-mayer-vs-cameron/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter/promotions/4040-most-valuable-promotions-mvp"
+    ]
+   ],
+   "country": "United Kingdom"
+  },
+  {
+   "date": "2026-08-29",
+   "sport": "Boxing",
+   "promoter": "Matchroom",
+   "title": "Lara vs Ornelas",
+   "bout": [
+    "Lara",
+    "Ornelas"
+   ],
+   "venue": "Guadalajara",
+   "city": "Mexico",
+   "broadcast": "DAZN",
+   "links": [
+    [
+     "Matchroom",
+     "https://www.matchroomboxing.com/events/lara-vs-ornelas/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter/promotions/2484-matchroom-boxing-mb"
+    ]
+   ],
+   "country": "Mexico"
+  },
+  {
+   "date": "2026-08-29",
+   "sport": "MMA",
+   "promoter": "UFC",
+   "title": "UFC Fight Night",
+   "bout": [
+    "Umar Nurmagomedov",
+    "Song Yadong"
+   ],
+   "venue": "Oriental Sports Center",
+   "city": "Shanghai, China",
+   "broadcast": "Paramount+",
+   "links": [
+    [
+     "Schedule",
+     "https://www.paramountplus.com/sneak-peak/ufc-schedule-2026/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "China"
+  },
+  {
+   "date": "2026-09-04",
+   "sport": "Boxing",
+   "promoter": "Matchroom",
+   "title": "Ruiz Jr. vs Knyba",
+   "bout": [
+    "Andy Ruiz Jr.",
+    "Knyba"
+   ],
+   "venue": "Prudential Center",
+   "city": "Newark, NJ",
+   "broadcast": "DAZN",
+   "links": [
+    [
+     "Matchroom",
+     "https://www.matchroomboxing.com/events/ruiz-vs-knyba/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter/promotions/2484-matchroom-boxing-mb"
+    ]
+   ],
+   "country": "United States"
+  },
+  {
+   "date": "2026-09-05",
+   "sport": "Boxing",
+   "promoter": "Matchroom",
+   "title": "Taylor vs Pili",
+   "bout": [
+    "Katie Taylor",
+    "Flora Pili"
+   ],
+   "tag": "Undisputed super-lightweight titles",
+   "venue": "Croke Park",
+   "city": "Dublin, Ireland",
+   "broadcast": "DAZN",
+   "links": [
+    [
+     "Matchroom",
+     "https://www.matchroomboxing.com/events/taylor-vs-pili/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter/promotions/2484-matchroom-boxing-mb"
+    ]
+   ],
+   "country": "Ireland"
+  },
+  {
+   "date": "2026-09-05",
+   "sport": "MMA",
+   "promoter": "UFC",
+   "title": "UFC Fight Night",
+   "bout": [
+    "Dan Hooker",
+    "Salahdine Parnasse"
+   ],
+   "venue": "Accor Arena",
+   "city": "Paris, France",
+   "broadcast": "Paramount+",
+   "links": [
+    [
+     "Schedule",
+     "https://www.paramountplus.com/sneak-peak/ufc-schedule-2026/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "France"
+  },
+  {
+   "date": "2026-09-05",
+   "sport": "MMA",
+   "promoter": "ONE",
+   "title": "ONE Fight Night 46",
+   "bout": [
+    "TBA",
+    "TBA"
+   ],
+   "venue": "Lumpinee Stadium",
+   "city": "Bangkok, Thailand",
+   "broadcast": "Prime Video",
+   "links": [
+    [
+     "Wikipedia",
+     "https://en.wikipedia.org/wiki/List_of_ONE_Championship_events"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "Thailand"
+  },
+  {
+   "date": "2026-09-10",
+   "sport": "MMA",
+   "promoter": "RIZIN",
+   "title": "Super RIZIN 5",
+   "bout": [
+    "Razhabali Shaydullaev",
+    "AJ McKee"
+   ],
+   "tag": "RIZIN & PFL featherweight double title fight",
+   "venue": "Kyocera Dome Osaka",
+   "city": "Osaka, Japan",
+   "broadcast": "RIZIN TV",
+   "links": [
+    [
+     "Wikipedia",
+     "https://en.wikipedia.org/wiki/2026_in_Rizin_Fighting_Federation"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "Japan"
+  },
+  {
+   "date": "2026-09-12",
+   "sport": "Boxing",
+   "promoter": "Misfits",
+   "title": "McCann vs Big Stacks",
+   "bout": [
+    "Jordan McCann",
+    "Big Stacks"
+   ],
+   "tag": "Heavyweight grudge match",
+   "venue": "Utilita Arena",
+   "city": "Newcastle upon Tyne, UK",
+   "broadcast": "DAZN",
+   "links": [
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter/promotions/4502-misfits-boxing-mf"
+    ],
+    [
+     "Wikipedia",
+     "https://en.wikipedia.org/wiki/2026_in_Misfits_Boxing_and_MF_Pro"
+    ]
+   ],
+   "country": "United Kingdom"
+  },
+  {
+   "date": "2026-09-12",
+   "sport": "MMA",
+   "promoter": "UFC",
+   "title": "Noche UFC",
+   "bout": [
+    "Rodriguez",
+    "Silva"
+   ],
+   "venue": "Desert Diamond Arena",
+   "city": "Glendale, AZ",
+   "broadcast": "Paramount+",
+   "links": [
+    [
+     "Schedule",
+     "https://www.paramountplus.com/sneak-peak/ufc-schedule-2026/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "United States"
+  },
+  {
+   "date": "2026-09-12",
+   "sport": "MMA",
+   "promoter": "Oktagon",
+   "title": "Oktagon 93: Roušal vs Mågård",
+   "bout": [
+    "Roušal",
+    "Jonas Mågård"
+   ],
+   "venue": "Winning Group Arena",
+   "city": "Brno, Czech Republic",
+   "broadcast": "Oktagon.tv",
+   "links": [
+    [
+     "Oktagon",
+     "https://oktagonmma.com/en/events/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "Czech Republic"
+  },
+  {
+   "date": "2026-09-19",
+   "sport": "Boxing",
+   "promoter": "Matchroom",
+   "title": "Hedges vs Brown",
+   "bout": [
+    "Hedges",
+    "Brown"
+   ],
+   "venue": "Co-op Live",
+   "city": "Manchester, UK",
+   "broadcast": "DAZN",
+   "links": [
+    [
+     "Matchroom",
+     "https://www.matchroomboxing.com/events/hedges-vs-brown/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter/promotions/2484-matchroom-boxing-mb"
+    ]
+   ],
+   "country": "United Kingdom"
+  },
+  {
+   "date": "2026-09-19",
+   "sport": "MMA",
+   "promoter": "UFC",
+   "title": "UFC 331",
+   "bout": [
+    "Joshua Van",
+    "Alexandre Pantoja"
+   ],
+   "tag": "Flyweight title rematch",
+   "venue": "Crypto.com Arena",
+   "city": "Los Angeles, CA",
+   "broadcast": "Paramount+",
+   "links": [
+    [
+     "Schedule",
+     "https://www.paramountplus.com/sneak-peak/ufc-schedule-2026/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "United States"
+  },
+  {
+   "date": "2026-09-26",
+   "sport": "Boxing",
+   "promoter": "Queensberry",
+   "title": "Homestretch",
+   "bout": [
+    "Liam Davies",
+    "Nathaniel Collins"
+   ],
+   "tag": "Super-bantamweight showdown",
+   "venue": "bp pulse LIVE",
+   "city": "Birmingham, UK",
+   "broadcast": "DAZN",
+   "links": [
+    [
+     "Queensberry",
+     "https://queensberry.co.uk/pages/liam-davies-vs-nathaniel-collins-homestretch"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter/promotions/2574-queensbury-promotions-qp"
+    ]
+   ],
+   "country": "United Kingdom"
+  },
+  {
+   "date": "2026-09-26",
+   "sport": "MMA",
+   "promoter": "UFC",
+   "title": "UFC Fight Night",
+   "bout": [
+    "TBA",
+    "TBA"
+   ],
+   "tag": "Main event TBA",
+   "venue": "Meta APEX",
+   "city": "Las Vegas, NV",
+   "broadcast": "Paramount+",
+   "links": [
+    [
+     "Schedule",
+     "https://www.paramountplus.com/sneak-peak/ufc-schedule-2026/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "United States"
+  },
+  {
+   "date": "2026-09-26",
+   "sport": "MMA",
+   "promoter": "Cage Warriors",
+   "title": "Cage Warriors 210",
+   "bout": [
+    "TBA",
+    "TBA"
+   ],
+   "venue": "RDS Arena",
+   "city": "Dublin, Ireland",
+   "broadcast": "UFC Fight Pass",
+   "links": [
+    [
+     "Cage Warriors",
+     "https://cagewarriors.com/cage-warriors-events/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "Ireland"
+  },
+  {
+   "date": "2026-09-26",
+   "sport": "MMA",
+   "promoter": "Oktagon",
+   "title": "Oktagon 94: Frankfurt",
+   "bout": [
+    "TBA",
+    "TBA"
+   ],
+   "tag": "Stadium show — 2024 edition drew a record 60,000",
+   "venue": "Deutsche Bank Park",
+   "city": "Frankfurt, Germany",
+   "broadcast": "Oktagon.tv",
+   "links": [
+    [
+     "Oktagon",
+     "https://oktagonmma.com/en/events/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "Germany"
+  },
+  {
+   "date": "2026-10-03",
+   "sport": "Boxing",
+   "promoter": "Matchroom",
+   "title": "Whittaker vs Wallace",
+   "bout": [
+    "Ben Whittaker",
+    "Conor Wallace"
+   ],
+   "tag": "IBF light-heavyweight final eliminator",
+   "venue": "Utilita Arena",
+   "city": "Birmingham, UK",
+   "broadcast": "DAZN",
+   "links": [
+    [
+     "Matchroom",
+     "https://www.matchroomboxing.com/events/whittaker-vs-wallace/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter/promotions/2484-matchroom-boxing-mb"
+    ]
+   ],
+   "country": "United Kingdom"
+  },
+  {
+   "date": "2026-10-03",
+   "sport": "MMA",
+   "promoter": "UFC",
+   "title": "UFC 332",
+   "bout": [
+    "TBA",
+    "TBA"
+   ],
+   "tag": "Main event TBA",
+   "venue": "Delta Center",
+   "city": "Salt Lake City, UT",
+   "broadcast": "Paramount+",
+   "links": [
+    [
+     "Schedule",
+     "https://www.paramountplus.com/sneak-peak/ufc-schedule-2026/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "United States"
+  },
+  {
+   "date": "2026-10-03",
+   "sport": "MMA",
+   "promoter": "ONE",
+   "title": "ONE Fight Night 47",
+   "bout": [
+    "TBA",
+    "TBA"
+   ],
+   "venue": "Lumpinee Stadium",
+   "city": "Bangkok, Thailand",
+   "broadcast": "Prime Video",
+   "links": [
+    [
+     "Wikipedia",
+     "https://en.wikipedia.org/wiki/List_of_ONE_Championship_events"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "Thailand"
+  },
+  {
+   "date": "2026-10-03",
+   "sport": "MMA",
+   "promoter": "RIZIN",
+   "title": "RIZIN Landmark 16 in Nagasaki",
+   "bout": [
+    "TBA",
+    "TBA"
+   ],
+   "venue": "Nagasaki Stadium City Happiness Arena",
+   "city": "Nagasaki, Japan",
+   "broadcast": "RIZIN TV",
+   "links": [
+    [
+     "Wikipedia",
+     "https://en.wikipedia.org/wiki/2026_in_Rizin_Fighting_Federation"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "Japan"
+  },
+  {
+   "date": "2026-10-17",
+   "sport": "MMA",
+   "promoter": "UFC",
+   "title": "UFC Fight Night",
+   "bout": [
+    "Joaquin Buckley",
+    "Mike Malott"
+   ],
+   "venue": "Rogers Place",
+   "city": "Edmonton, Canada",
+   "broadcast": "Paramount+",
+   "links": [
+    [
+     "Schedule",
+     "https://www.paramountplus.com/sneak-peak/ufc-schedule-2026/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "Canada"
+  },
+  {
+   "date": "2026-10-17",
+   "sport": "MMA",
+   "promoter": "Cage Warriors",
+   "title": "Cage Warriors 211",
+   "bout": [
+    "TBA",
+    "TBA"
+   ],
+   "venue": "PalaPellicone",
+   "city": "Rome, Italy",
+   "broadcast": "UFC Fight Pass",
+   "links": [
+    [
+     "Cage Warriors",
+     "https://cagewarriors.com/cage-warriors-events/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "Italy"
+  },
+  {
+   "date": "2026-10-17",
+   "sport": "MMA",
+   "promoter": "Oktagon",
+   "title": "Oktagon 95: Karlovy Vary",
+   "bout": [
+    "TBA",
+    "TBA"
+   ],
+   "venue": "Mattoni Arena",
+   "city": "Karlovy Vary, Czech Republic",
+   "broadcast": "Oktagon.tv",
+   "links": [
+    [
+     "Oktagon",
+     "https://oktagonmma.com/en/events/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "Czech Republic"
+  },
+  {
+   "date": "2026-10-24",
+   "sport": "Boxing",
+   "promoter": "Matchroom",
+   "title": "Smith vs Puello",
+   "bout": [
+    "Smith",
+    "Alberto Puello"
+   ],
+   "venue": "Utilita Arena",
+   "city": "Sheffield, UK",
+   "broadcast": "DAZN",
+   "links": [
+    [
+     "Matchroom",
+     "https://www.matchroomboxing.com/events/smith-vs-puello/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter/promotions/2484-matchroom-boxing-mb"
+    ]
+   ],
+   "country": "United Kingdom"
+  },
+  {
+   "date": "2026-10-24",
+   "sport": "MMA",
+   "promoter": "UFC",
+   "title": "UFC 333",
+   "bout": [
+    "Alexander Volkanovski",
+    "Movsar Evloev"
+   ],
+   "tag": "Featherweight title — reported, not yet on UFC's own schedule page",
+   "venue": "Etihad Arena",
+   "city": "Abu Dhabi, UAE",
+   "broadcast": "Paramount+",
+   "links": [
+    [
+     "Schedule",
+     "https://www.paramountplus.com/sneak-peak/ufc-schedule-2026/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "United Arab Emirates"
+  },
+  {
+   "date": "2026-10-31",
+   "sport": "MMA",
+   "promoter": "Oktagon",
+   "title": "Oktagon 96: Gogoladze vs Klinkhammer",
+   "bout": [
+    "Gogoladze",
+    "Klinkhammer"
+   ],
+   "venue": "SAP Garden",
+   "city": "Munich, Germany",
+   "broadcast": "Oktagon.tv",
+   "links": [
+    [
+     "Oktagon",
+     "https://oktagonmma.com/en/events/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "Germany"
+  },
+  {
+   "date": "2026-11-07",
+   "sport": "MMA",
+   "promoter": "ONE",
+   "title": "ONE Fight Night 48",
+   "bout": [
+    "TBA",
+    "TBA"
+   ],
+   "venue": "Lumpinee Stadium",
+   "city": "Bangkok, Thailand",
+   "broadcast": "Prime Video",
+   "links": [
+    [
+     "Wikipedia",
+     "https://en.wikipedia.org/wiki/List_of_ONE_Championship_events"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "Thailand"
+  },
+  {
+   "date": "2026-11-07",
+   "sport": "MMA",
+   "promoter": "Oktagon",
+   "title": "Oktagon 97: Severino vs Holzer",
+   "bout": [
+    "Severino",
+    "Holzer"
+   ],
+   "venue": "ZAG Arena",
+   "city": "Hannover, Germany",
+   "broadcast": "Oktagon.tv",
+   "links": [
+    [
+     "Oktagon",
+     "https://oktagonmma.com/en/events/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "Germany"
+  },
+  {
+   "date": "2026-11-08",
+   "sport": "MMA",
+   "promoter": "RIZIN",
+   "title": "RIZIN Landmark 17 in Chiba",
+   "bout": [
+    "TBA",
+    "TBA"
+   ],
+   "tag": "RIZIN Japan GP heavyweight final expected",
+   "venue": "LaLa Arena Tokyo-Bay",
+   "city": "Funabashi, Chiba, Japan",
+   "broadcast": "RIZIN TV",
+   "links": [
+    [
+     "Wikipedia",
+     "https://en.wikipedia.org/wiki/2026_in_Rizin_Fighting_Federation"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "Japan"
+  },
+  {
+   "date": "2026-11-27",
+   "sport": "MMA",
+   "promoter": "Cage Warriors",
+   "title": "Cage Warriors — Manchester",
+   "bout": [
+    "TBA",
+    "TBA"
+   ],
+   "tag": "Invite-only show",
+   "venue": "BEC Arena",
+   "city": "Manchester, UK",
+   "broadcast": "UFC Fight Pass",
+   "links": [
+    [
+     "Cage Warriors",
+     "https://cagewarriors.com/cage-warriors-events/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "United Kingdom"
+  },
+  {
+   "date": "2026-11-28",
+   "sport": "MMA",
+   "promoter": "Cage Warriors",
+   "title": "Cage Warriors — Manchester",
+   "bout": [
+    "TBA",
+    "TBA"
+   ],
+   "venue": "BEC Arena",
+   "city": "Manchester, UK",
+   "broadcast": "UFC Fight Pass",
+   "links": [
+    [
+     "Cage Warriors",
+     "https://cagewarriors.com/cage-warriors-events/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "United Kingdom"
+  },
+  {
+   "date": "2026-12-05",
+   "sport": "MMA",
+   "promoter": "Oktagon",
+   "title": "Oktagon 99: Dortmund",
+   "bout": [
+    "TBA",
+    "TBA"
+   ],
+   "venue": "Westfalenhalle",
+   "city": "Dortmund, Germany",
+   "broadcast": "Oktagon.tv",
+   "links": [
+    [
+     "Oktagon",
+     "https://oktagonmma.com/en/events/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "Germany"
+  },
+  {
+   "date": "2026-12-12",
+   "sport": "MMA",
+   "promoter": "ONE",
+   "title": "ONE Fight Night 49",
+   "bout": [
+    "TBA",
+    "TBA"
+   ],
+   "venue": "Lumpinee Stadium",
+   "city": "Bangkok, Thailand",
+   "broadcast": "Prime Video",
+   "links": [
+    [
+     "Wikipedia",
+     "https://en.wikipedia.org/wiki/List_of_ONE_Championship_events"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "Thailand"
+  },
+  {
+   "date": "2026-12-29",
+   "sport": "MMA",
+   "promoter": "Oktagon",
+   "title": "Oktagon 100: Prague",
+   "bout": [
+    "TBA",
+    "TBA"
+   ],
+   "tag": "100th show — season finale",
+   "venue": "O2 Arena",
+   "city": "Prague, Czech Republic",
+   "broadcast": "Oktagon.tv",
+   "links": [
+    [
+     "Oktagon",
+     "https://oktagonmma.com/en/events/"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "Czech Republic"
+  },
+  {
+   "date": "2026-12-31",
+   "sport": "MMA",
+   "promoter": "RIZIN",
+   "title": "RIZIN New Year's Eve",
+   "bout": [
+    "TBA",
+    "TBA"
+   ],
+   "tag": "Inaugural heavyweight title expected",
+   "venue": "Vantelin Dome Nagoya",
+   "city": "Nagoya, Japan",
+   "broadcast": "RIZIN TV",
+   "links": [
+    [
+     "Wikipedia",
+     "https://en.wikipedia.org/wiki/2026_in_Rizin_Fighting_Federation"
+    ],
+    [
+     "Tapology",
+     "https://www.tapology.com/fightcenter"
+    ]
+   ],
+   "country": "Japan"
+  }
+ ],
+ "dormant": {
+  "BOXXER": "No BOXXER dates announced past 8 August in Leeds. Ben Shalom has said the aim is roughly a show a month across BBC and DAZN, so autumn dates should land soon.",
+  "PFL": "PFL Tampa on 22 August is the last globally announced card. Africa and MENA postseason dates, plus the first cards under the MVP merger, haven't been published yet."
+ },
+ "flags": {
+  "United Kingdom": "🇬🇧",
+  "United States": "🇺🇸",
+  "Ireland": "🇮🇪",
+  "Japan": "🇯🇵",
+  "Germany": "🇩🇪",
+  "Czech Republic": "🇨🇿",
+  "Thailand": "🇹🇭",
+  "Australia": "🇦🇺",
+  "Canada": "🇨🇦",
+  "China": "🇨🇳",
+  "France": "🇫🇷",
+  "Italy": "🇮🇹",
+  "Mexico": "🇲🇽",
+  "United Arab Emirates": "🇦🇪",
+  "Saudi Arabia": "🇸🇦",
+  "Spain": "🇪🇸",
+  "Poland": "🇵🇱",
+  "Belgium": "🇧🇪",
+  "Netherlands": "🇳🇱",
+  "South Africa": "🇿🇦",
+  "Nigeria": "🇳🇬",
+  "Brazil": "🇧🇷",
+  "Puerto Rico": "🇵🇷",
+  "Slovakia": "🇸🇰",
+  "Austria": "🇦🇹",
+  "Serbia": "🇷🇸",
+  "Azerbaijan": "🇦🇿",
+  "Singapore": "🇸🇬",
+  "New Zealand": "🇳🇿",
+  "Sweden": "🇸🇪"
+ }
+}
