@@ -3,7 +3,7 @@
 Upcoming boxing and MMA cards, filterable by sport, promoter and country, rebuilt from live sources
 every morning by a GitHub Action. Static site, no dependencies, no build step.
 
-**Boxing:** Queensberry · Matchroom · BOXXER · Misfits · MVP
+**Boxing:** Queensberry · Matchroom · BOXXER · Misfits · MVP · Zuffa Boxing · PBC · Golden Boy
 **MMA:** UFC · PFL · ONE · Cage Warriors · RIZIN · Oktagon
 
 ## Files
@@ -125,16 +125,13 @@ and Praha. If something lands as `Other`, add the city to `CITIES` in `update.mj
 
 ## Promoter logos
 
-Ten are in place — Queensberry, Matchroom, Misfits, MVP, UFC, PFL, ONE, Cage Warriors, RIZIN and
-Oktagon — each rendered as a flat white mark so it reads on the dark badge tile. UFC is true
-vector (`ufc.svg`) so it stays sharp at any size; the rest are 512px PNGs from raster sources.
-**BOXXER** falls back to its typographic badge (`BXR`) until artwork is added.
+All fourteen promoters have artwork, each rendered as a flat white mark so it reads on the dark
+badge tile. UFC is true vector (`ufc.svg`) so it stays sharp at any size; the rest are 512px PNGs
+from raster sources. Nothing falls back to a typographic badge any more.
 
-To add or replace one, drop a file in `logos/` named after the promoter's `slug` in `data.json`:
-
-```
-logos/boxxer.svg     (.svg preferred — sharper and smaller; .png also works)
-```
+To add a new promoter's mark, or replace an existing one, drop a file in `logos/` named after that
+promoter's `slug` in `data.json` — `logos/<slug>.svg` or `logos/<slug>.png`. SVG is preferred:
+sharper and smaller.
 
 It's picked up on the next load with no code change. Transparent background, light or
 full-colour mark. If you're processing new artwork to match, the treatment is: take the

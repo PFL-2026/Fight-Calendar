@@ -70,8 +70,10 @@ function parseDate(text, fallbackYear){
   let m;
   if ((m = t.match(/\b(20\d{2})-(\d{1,2})-(\d{1,2})\b/)))            return mk(+m[1], +m[2], +m[3]);
   if ((m = t.match(/\b(\d{1,2})[.\/](\d{1,2})[.\/](20\d{2})(?!\d)/)))return mk(+m[3], +m[2], +m[1]);   // day first
-  if ((m = t.match(new RegExp(`\\b(${MON.join("|")})\\w*\\.?\\s+(\\d{1,2})(?:st|nd|rd|th)?,?\\s*(20\\d{2})?\\b`, "i"))))
-    return mk(m[3] ? +m[3] : fallbackYear, MON.indexOf(m[1].toLowerCase()) + 1, +m[2]);
+  // Month first, full or abbreviated: "September 19, 2026", "Sep 19, 2026", "Sept. 19"
+  if ((m = t.match(new RegExp(`\\b(${MON.map(x => x.slice(0,3)).join("|")})\\w*\\.?\\s+(\\d{1,2})(?:st|nd|rd|th)?,?\\s*(20\\d{2})?\\b`, "i"))))
+    return mk(m[3] ? +m[3] : fallbackYear,
+              MON.findIndex(x => x.startsWith(m[1].toLowerCase())) + 1, +m[2]);
   if ((m = t.match(new RegExp(`\\b(\\d{1,2})(?:st|nd|rd|th)?\\s+(${MON.map(x => x.slice(0,3)).join("|")})\\w*\\.?,?\\s*(20\\d{2})?\\b`, "i"))))
     return mk(m[3] ? +m[3] : fallbackYear, MON.findIndex(x => x.startsWith(m[2].toLowerCase())) + 1, +m[1]);
   return null;
@@ -108,6 +110,12 @@ const ALIAS = {
   usa:"United States", us:"United States", america:"United States",
   uae:"United Arab Emirates", czechia:"Czech Republic", holland:"Netherlands", ksa:"Saudi Arabia"
 };
+// Some promoters write the state out in full ("Las Vegas, Nevada") rather than "NV".
+const US_STATE_NAMES = ("alabama alaska arizona arkansas california colorado connecticut delaware florida "
+  + "georgia hawaii idaho illinois indiana iowa kansas kentucky louisiana maine maryland massachusetts "
+  + "michigan minnesota mississippi missouri montana nebraska nevada|new hampshire|new jersey|new mexico|new york "
+  + "north carolina|north dakota ohio oklahoma oregon pennsylvania rhode island|south carolina|south dakota "
+  + "tennessee texas utah vermont virginia washington|west virginia wisconsin wyoming").replace(/ /g, "|");
 const US_STATES = new Set("AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY DC".split(" "));
 const CITIES = {
   london:"United Kingdom", manchester:"United Kingdom", birmingham:"United Kingdom",
@@ -125,6 +133,12 @@ const CITIES = {
   bratislava:"Slovakia", vienna:"Austria", belgrade:"Serbia", baku:"Azerbaijan",
   "gold coast":"Australia", sydney:"Australia", melbourne:"Australia", perth:"Australia",
   edmonton:"Canada", toronto:"Canada", montreal:"Canada", guadalajara:"Mexico",
+  // US host cities that appear without a state
+  "las vegas":"United States", "san diego":"United States", "los angeles":"United States",
+  "new york":"United States", brooklyn:"United States", "palm desert":"United States",
+  indio:"United States", "san jose":"United States", tampa:"United States", newark:"United States",
+  orlando:"United States", philadelphia:"United States", sacramento:"United States",
+  glendale:"United States", "salt lake city":"United States", temecula:"United States",
   // local-language spellings — Oktagon and RIZIN list venues in their own language
   "münchen":"Germany", muenchen:"Germany", "köln":"Germany", koeln:"Germany",
   praha:"Czech Republic", liberec:"Czech Republic", "třinec":"Czech Republic",
@@ -141,6 +155,7 @@ function country(...parts){
     if (new RegExp(`(^|[\\s,.])${a}([\\s,.]|$)`).test(low)) return c;
   for (const tok of blob.match(/\b[A-Z]{2}\b/g) || [])
     if (US_STATES.has(tok)) return "United States";
+  if (new RegExp(`\\b(${US_STATE_NAMES})\\b`).test(low)) return "United States";
   for (const [city, c] of Object.entries(CITIES))
     if (new RegExp(`\\b${city}\\b`).test(low)) return c;
   return "Other";
@@ -237,6 +252,9 @@ const SITES = {
   queensberry:  () => fromLines({ url:"https://queensberry.co.uk/pages/events",               promoter:"Queensberry",   sport:"Boxing", broadcast:"DAZN",       titleRe:/[a-z]{4}/i, window:3 }),
   mvp:          () => fromLines({ url:"https://www.mostvaluablepromotions.com/events/",       promoter:"MVP",           sport:"Boxing",                          titleRe:/\bvs\b|mvpw/i }),
   boxxer:       () => fromLines({ url:"https://www.boxxer.com/tickets/",                      promoter:"BOXXER",        sport:"Boxing", broadcast:"DAZN",       titleRe:/\bvs\b/i }),
+  /* PBC lists "Fight Night: Sat, Sep 19, 2026" then the bout name, then the venue. */
+  pbc:          () => fromLines({ url:"https://www.premierboxingchampions.com/boxing-schedule", promoter:"PBC",          sport:"Boxing", titleRe:/\bvs\b/i }),
+  goldenboy:    () => fromLines({ url:"https://www.goldenboy.com/events/",                      promoter:"Golden Boy",  sport:"Boxing", titleRe:/\bvs\b|golden boy/i }),
   cagewarriors: () => fromLines({ url:"https://cagewarriors.com/cage-warriors-events/",       promoter:"Cage Warriors", sport:"MMA", broadcast:"UFC Fight Pass", titleRe:/^cage warriors\s*\d+/i, nameFrom:"venue" })
 };
 

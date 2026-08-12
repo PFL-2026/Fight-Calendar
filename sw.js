@@ -1,11 +1,12 @@
 /* Shell cache-first so the app opens instantly offline.
    data.json network-first so the daily refresh always wins when online.
    Bump VERSION whenever you edit index.html. */
-const VERSION = "fc-v3";
+const VERSION = "fc-v5";
 const SHELL = ["./", "./index.html", "./icon.png",
   "./logos/cagewarriors.png", "./logos/matchroom.png", "./logos/misfits.png", "./logos/mvp.png",
   "./logos/oktagon.png", "./logos/one.png", "./logos/pfl.png", "./logos/queensberry.png",
-  "./logos/rizin.png", "./logos/ufc.svg"];
+  "./logos/rizin.png", "./logos/ufc.svg",
+  "./logos/pbc.png", "./logos/zuffa.png", "./logos/goldenboy.png", "./logos/boxxer.png"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(SHELL)).catch(()=>{}).then(() => self.skipWaiting()));
