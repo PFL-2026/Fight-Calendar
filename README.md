@@ -36,24 +36,71 @@ Live at `https://<username>.github.io/<repo>/`.
 
 ```
 promoter sites ─┐
-                ├─→ update.mjs (Actions, 06:17 UTC daily) ─→ data.json ─→ page
+                ├─→ update.mjs (Actions, 06:17 + 18:17 UTC) ─→ data.json ─→ page
 Wikipedia API ──┘
 ```
 
 Runs server-side in GitHub's runners, so no browser CORS limits. Commits `data.json` only when
 something changed. The page reads it on load, so new and amended fixtures appear with no code edit.
 
-The masthead shows the last update date and turns red past 48 hours — that's your signal a run failed.
+### This is the point: it maintains itself
 
-**BoxRec and Tapology aren't scraped.** No public API, bot protection, and their terms don't
-permit it. They stay as outbound reference links on every card, which is what they're good for.
-Inputs are Wikipedia's MediaWiki API (the backbone — Misfits, UFC, PFL, ONE, RIZIN, Oktagon,
-Cage Warriors) plus the promoter sites. Most promoters have two sources so one failing isn't fatal.
+Every run rebuilds each promoter's entire future list from scratch rather than appending, which
+is what makes cancellations and postponements work as well as additions.
 
-**Safety rails.** If every source for a promoter fails, its existing dates are kept, not wiped,
-and it's listed in `staleSources`. The script refuses to write if the total event count falls
-below 40% of the previous run. Hand-curated detail — headline bout, title-fight note, broadcaster —
-is carried onto freshly scraped rows by fuzzy title match, so a re-scrape won't flatten your edits.
+| Change | Picked up? |
+|---|---|
+| New card announced | Yes, twice a day, and badged **New** on the page for 7 days |
+| Date moved or postponed | Yes — reported as `~ Matchroom: Whittaker vs Wallace (2026-09-19 → 2026-10-03)` |
+| Venue, title or main event changed | Yes |
+| Card cancelled and pulled by the source | Yes, removed automatically |
+| Cards in a brand new month or year | Yes — months are derived from the data, and Wikipedia sources use a `{year}` token that rolls over on its own |
+| Card cancelled but still listed by the source | No — add it to `manualDrop` |
+| A promoter with no online listing at all | No — add it to `manualAdd` |
+
+**Every change is recorded three ways**, so you never have to take it on trust:
+
+1. **The page** — a line under the headline reads *"Last update: 2 new cards · 1 rescheduled"*, and new announcements carry a gold **New** badge for a week.
+2. **The commit history** — each commit is a readable changelog: `2026-09-04: 2 new, 1 rescheduled` with `+ Queensberry: Itauma vs Dubois (2026-11-21)` in the body. Your repo becomes an audit trail of the season.
+3. **The Actions log** — `NEW (2): …`, `MOVED (1): …`, `GONE (1): …` on every run.
+
+Your hand-written detail (headline bout, title-fight note, broadcaster) is carried onto freshly
+scraped rows by fuzzy title match, so a re-scrape won't flatten your edits.
+
+### Knowing when it breaks
+
+Three signals, in order of how quickly you'll see them:
+
+1. **Email from GitHub.** If a source is unreachable, the run finishes red and GitHub emails you. It still commits whatever it got first, so a fault never costs you data.
+2. **Banner on the page.** Any promoter not refreshed for over 7 days gets a red strip above the calendar naming it.
+3. **Masthead date.** Turns red if the whole file is more than 48 hours old.
+
+A source that responds but lists nothing — BOXXER between announcements, say — is *not* treated as
+a fault. Those are logged as `unconfirmed`, cached dates are kept, and the build stays green.
+
+### The honest limits
+
+- **Nine of eleven promoters had a single source.** Wikipedia fallbacks are now added wherever a per-year page exists, but **Queensberry, Matchroom, BOXXER and MVP still depend on one scrape each** — their own website. No second machine-readable source exists for them. If one restyles, that promoter freezes on cached dates until you're alerted and the adapter is adjusted.
+- **Announcement lag.** Promoter sites list a card when tickets go on sale; Wikipedia depends on volunteer editors. Expect same-day to a few days behind the press release, not instant.
+- **The site adapters were written against markup I read once.** The parsers are unit-tested and read visible text rather than CSS classes, but they've not been run against the live pages. Your first workflow run is the real test.
+- **The collapse guard.** If the future event count drops below 40% of the previous run the script refuses to write. Protective, but a genuine mass-cancellation would need a manual run to go through.
+
+### What you need to do
+
+**Once, at setup:** enable *Read and write permissions* under Settings → Actions → General. Without
+it the job runs but can't commit, and nothing ever changes.
+
+**On the first run:** open the Actions log and check every source reports rows —
+`Oktagon ← oktagon: 7`, not `! Matchroom ← matchroom: 0 rows`. Anything on zero needs its adapter
+adjusted. This is the single most useful five minutes you can spend on it.
+
+**Ongoing:** nothing, unless GitHub emails you. Then open the log, see which source is down, and
+fix that one adapter.
+
+**Watch for this:** GitHub pauses scheduled workflows on repositories with no activity for 60 days,
+and emails the owner before doing so. Bot commits don't reliably reset that clock. If the calendar
+is busy this never comes up; if it goes quiet, either re-enable it from the emailed link or push any
+small commit. Belt and braces: run the workflow by hand from the Actions tab every couple of months.
 
 ## Editing by hand
 
@@ -78,10 +125,23 @@ and Praha. If something lands as `Other`, add the city to `CITIES` in `update.mj
 
 ## Promoter logos
 
-MVP is done — `logo-mvp.png` shows on MVP cards. For the rest, drop a file at the repo root named
-`logo-<slug>.png` or `.svg` (`logo-pfl.png`, `logo-matchroom.svg`, …) matching the `slug` in
-`data.json`. It's picked up automatically, no code change. Transparent background, light or
-full-colour mark — the tile behind it is dark. Only add marks you have the rights to use.
+Nine are in place — Queensberry, Matchroom, Misfits, MVP, PFL, ONE, Cage Warriors, RIZIN and
+Oktagon — each rendered as a flat white silhouette so it reads on the dark badge tile.
+**BOXXER and UFC** fall back to their typographic badge until artwork is added.
+
+To add or replace one, drop a file in `logos/` named after the promoter's `slug` in `data.json`:
+
+```
+logos/boxxer.png     logos/ufc.png     (.svg also works and is preferred)
+```
+
+It's picked up on the next load with no code change. Transparent background, light or
+full-colour mark. If you're processing new artwork to match, the treatment is: take the
+alpha channel where the source has real transparency, or `255 − luminance` where it sits on
+a white plate; stretch the levels so solid ink reaches full opacity; recolour to `#F2F0EB`;
+trim to the artwork; cap at 512px.
+
+Only add marks you have the rights to use.
 
 ## Testing
 

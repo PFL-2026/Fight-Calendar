@@ -250,22 +250,46 @@ const dedupeLinks = ls => {
 const db = JSON.parse(await readFile(FILE, "utf8"));
 FLAGS = db.flags || {};
 const prev = (db.events || []).filter(e => e.date >= TODAY);
-const fresh = {}, failed = [];
+const fresh = {}, broken = [], unconfirmed = [];
+db.lastSeen ||= {};
 
 for (const [name, cfg] of Object.entries(db.promoters)){
   if (ONLY && !ONLY.includes(name)) continue;
   const rows = [];
-  for (const src of cfg.sources || []){
+  let reachable = false;                       // did at least one source actually respond?
+  const yr = new Date().getFullYear();
+  // {year} expands to this year and next: in December we still want January's fixtures,
+  // and come January the new year's page is picked up without anyone editing this repo.
+  const srcs = (cfg.sources || []).flatMap(s =>
+    s.includes("{year}") ? [String(yr), String(yr + 1)].map(y => s.replace("{year}", y)) : [s]);
+  for (const src of srcs){
     try {
       const got = src.startsWith("wikipedia:")
         ? await wikipedia(src.slice(10), name, cfg.sport)
         : await SITES[src]?.();
+      reachable = true;
       if (got?.length){ rows.push(...got); log(`${name} ← ${src}: ${got.length}`); }
       else warn(`${name} ← ${src}: 0 rows`);
-    } catch (e) { warn(`${name} ← ${src} failed: ${e.message}`); }
+    } catch (e) {
+      const missing = /missingtitle|does not exist|HTTP 404/i.test(e.message);
+      if (missing) log(`${name} ← ${src}: page not created yet`);
+      else warn(`${name} ← ${src} failed: ${e.message}`);
+      if (missing) reachable = true;            // Wikipedia answered; the page just isn't written
+    }
   }
-  if (rows.length) fresh[name] = [...new Map(rows.map(e => [`${e.date}|${norm(e.title)}`, e])).values()];
-  else { failed.push(name); fresh[name] = prev.filter(e => e.promoter === name); }   // keep last known good
+
+  if (rows.length){
+    fresh[name] = [...new Map(rows.map(e => [`${e.date}|${norm(e.title)}`, e])).values()];
+    db.lastSeen[name] = TODAY;
+  } else if (reachable){
+    // Sources answered but listed nothing. Could be a genuinely empty diary, could be a
+    // silently broken adapter — so keep what we have and flag it quietly rather than wipe.
+    unconfirmed.push(name);
+    fresh[name] = prev.filter(e => e.promoter === name);
+  } else {
+    broken.push(name);                          // nothing responded — that is a real fault
+    fresh[name] = prev.filter(e => e.promoter === name);
+  }
 }
 
 /* Carry hand-curated detail onto freshly scraped rows. */
@@ -287,6 +311,7 @@ for (const [name, rows] of Object.entries(fresh)){
       venue: r.venue !== "Venue TBA" ? r.venue : (k.venue || "Venue TBA"),
       city: r.city || k.city || "",
       country: (r.country && r.country !== "Other") ? r.country : (k.country || r.country || "Other"),
+      ...(k.firstSeen ? { firstSeen: k.firstSeen } : (Object.keys(k).length ? {} : { firstSeen: TODAY })),
       broadcast: r.broadcast || k.broadcast || "",
       links: dedupeLinks([...(r.links || []), ...(k.links || []), ...(db.promoters[name].refs || []).slice(0, 1)])
     });
@@ -300,7 +325,52 @@ const events = merged
   .filter(e => !drop.has(`${e.promoter}|${e.date}`) && inWindow(e.date))
   .sort((a, b) => a.date.localeCompare(b.date) || a.promoter.localeCompare(b.promoter));
 
-log(`${prev.length} → ${events.length} future events${failed.length ? `; kept cached: ${failed.join(", ")}` : ""}`);
+/* ---- change report: what did this run actually do? ----------------------
+   Several cards share a title in any given season ("UFC Fight Night" five times over),
+   so a title-only key produces phantom postponements. Group by promoter + title + main
+   event, then pair old and new within each group by date order. */
+function diff(before, after){
+  const grp = list => {
+    const m = new Map();
+    for (const e of list){
+      const k = `${e.promoter}|${norm(e.title)}|${norm(e.bout?.[0] || "")}`;
+      (m.get(k) || m.set(k, []).get(k)).push(e);
+    }
+    for (const v of m.values()) v.sort((a, b) => a.date.localeCompare(b.date));
+    return m;
+  };
+  const A = grp(before), B = grp(after);
+  const added = [], removed = [], moved = [];
+  for (const [k, news] of B){
+    const olds = A.get(k) || [];
+    news.forEach((n, i) => {
+      const o = olds[i];
+      if (!o) added.push(n);
+      else if (o.date !== n.date) moved.push([o, n]);
+    });
+  }
+  for (const [k, olds] of A){
+    const news = B.get(k) || [];
+    olds.slice(news.length).forEach(o => removed.push(o));
+  }
+  return { added, removed, moved };
+}
+
+const label = e => `${e.promoter}: ${e.title} (${e.date})`;
+const { added, removed, moved } = diff(prev, events);
+const addedL   = added.map(label);
+const removedL = removed.map(label);
+const movedL   = moved.map(([o, n]) => `${n.promoter}: ${n.title} (${o.date} → ${n.date})`);
+
+db.changes   = { at: TODAY, added: addedL, removed: removedL, moved: movedL };
+db.changeLog = [{ at: TODAY, added: addedL.length, removed: removedL.length, moved: movedL.length },
+                ...(db.changeLog || [])].slice(0, 30);
+
+log(`${prev.length} → ${events.length} future events`);
+if (addedL.length)   log(`NEW (${addedL.length}): ${addedL.join(" · ")}`);
+if (movedL.length)   log(`MOVED (${movedL.length}): ${movedL.join(" · ")}`);
+if (removedL.length) log(`GONE (${removedL.length}): ${removedL.join(" · ")}`);
+if (!addedL.length && !movedL.length && !removedL.length) log("no fixture changes");
 
 if (DRY){ console.log(JSON.stringify(events, null, 1)); process.exit(0); }
 
@@ -311,8 +381,9 @@ if (prev.length > 5 && events.length < prev.length * 0.4){
 }
 
 db.generatedAt  = new Date().toISOString();
-db.source       = failed.length ? `live (stale: ${failed.join(", ")})` : "live";
-db.staleSources = failed;
+db.source       = broken.length ? `live (${broken.length} source(s) down)` : "live";
+db.staleSources = broken;          // real faults — these trigger the build alert
+db.unconfirmed  = unconfirmed;     // responded but listed nothing; informational only
 db.events       = events;
 await writeFile(FILE, JSON.stringify(db, null, 1) + "\n");
 log("wrote data.json");

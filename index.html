@@ -60,6 +60,9 @@ select:focus-visible,button:focus-visible,a:focus-visible,[tabindex]:focus-visib
 .reflink:hover{color:var(--bone);border-color:var(--muted)}
 .reflink span{color:var(--gold)}
 
+.health{border:1px solid var(--red);border-left:3px solid var(--red);border-radius:2px;
+  padding:10px 13px;margin-bottom:20px;font-family:var(--mono);font-size:11px;line-height:1.6;color:var(--muted)}
+.health b{color:var(--red);font-weight:500}
 .monthbar{display:flex;align-items:center;gap:10px;margin-bottom:24px}
 .navbtn{background:transparent;border:1px solid var(--line);color:var(--bone);width:36px;height:36px;flex:0 0 36px;border-radius:2px;cursor:pointer;font-size:16px;line-height:1;display:grid;place-items:center}
 .navbtn:hover:not(:disabled){border-color:var(--muted)}
@@ -95,6 +98,12 @@ select:focus-visible,button:focus-visible,a:focus-visible,[tabindex]:focus-visib
 .badge .mark.long{font-size:19px}
 .badge .full{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);line-height:1.2}
 .badge img{max-width:100%;max-height:46px;object-fit:contain;display:block}
+.isnew{display:inline-block;font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink);background:var(--gold);border-radius:2px;
+  padding:1px 5px;vertical-align:middle;margin-left:8px;font-weight:600}
+.moved{color:var(--gold)}
+.changes{font-family:var(--mono);font-size:11px;color:var(--muted);margin:10px 0 0;line-height:1.6}
+.changes b{color:var(--gold);font-weight:500}
 .badge .code{font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--c)}
 .ebody h3{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:24px;line-height:1.02;letter-spacing:.01em;margin:0 0 4px}
 .bout{font-size:14px;margin:0 0 8px}
@@ -127,10 +136,10 @@ footer strong{color:var(--bone);font-weight:500}
   .chip{font-size:0;padding:0;height:5px;border-left:none;background:var(--c);border-radius:1px}
   .more{display:none}
   .gridhead div{padding:0 2px}
-  .event{grid-template-columns:60px 1fr;gap:12px}
-  .badge{width:60px;min-height:52px;padding:7px 4px}
+  .event{grid-template-columns:72px 1fr;gap:12px}
+  .badge{width:72px;min-height:52px;padding:7px 5px}
   .badge .mark{font-size:19px}.badge .mark.long{font-size:13px}
-  .badge .full{display:none}.badge img{max-height:34px}
+  .badge .full{display:none}.badge img{max-height:32px}
   .ebody h3{font-size:21px}
 }
 @media (display-mode:standalone){
@@ -175,6 +184,9 @@ footer strong{color:var(--bone);font-weight:500}
     </div>
     <div class="refbar" id="refbar"></div>
   </div>
+
+  <p class="changes" id="changes"></p>
+  <div id="health"></div>
 
   <div class="monthbar">
     <button class="navbtn" id="prev" aria-label="Previous month">‹</button>
@@ -223,6 +235,8 @@ async function boot(){
   EVENTS=(d.events||[]).filter(e=>e.date>=TODAY).sort((a,b)=>a.date.localeCompare(b.date)||a.promoter.localeCompare(b.promoter));
   DORMANT=d.dormant||{};FLAGS=d.flags||{};
   stamp(d.generatedAt);
+  health(d);
+  changes(d);
 
   MONTHS=[...new Set(EVENTS.map(e=>e.date.slice(0,7)))].sort();
   if(!MONTHS.length)MONTHS=[TODAY.slice(0,7)];
@@ -242,7 +256,7 @@ function stamp(iso){
 /* Swap the typographic badge for logo-<slug>.svg|png when the file exists. */
 function preloadLogos(){
   Object.values(PROMOTERS).forEach(p=>["svg","png"].forEach(ext=>{
-    const url=`logo-${p.slug}.${ext}`,img=new Image();
+    const url=`logos/${p.slug}.${ext}`,img=new Image();
     img.onload=()=>{if(!logoCache[p.slug]){logoCache[p.slug]=url;buildList();}};
     img.src=url;
   }));
@@ -257,6 +271,29 @@ function buildPromoSelect(){
   const names=Object.keys(PROMOTERS).filter(n=>state.sport==="ALL"||PROMOTERS[n].sport===state.sport);
   if(!names.includes(state.promo))state.promo="ALL";
   $("promo").innerHTML=`<option value="ALL">All promoters</option>`+names.map(n=>`<option value="${esc(n)}"${n===state.promo?" selected":""}>${esc(n)}</option>`).join("");
+}
+
+/* Show what the last run picked up, so it's obvious the calendar is live. */
+function changes(d){
+  const c=d.changes||{},bits=[];
+  if(c.added?.length)   bits.push(`<b>${c.added.length} new</b> card${c.added.length>1?"s":""}`);
+  if(c.moved?.length)   bits.push(`<b>${c.moved.length}</b> rescheduled`);
+  if(c.removed?.length) bits.push(`<b>${c.removed.length}</b> removed`);
+  $("changes").innerHTML = bits.length
+    ? `Last update: ${bits.join(" · ")}. ${esc((c.added||[]).concat(c.moved||[]).slice(0,3).join(" · "))}`
+    : "";
+}
+
+/* Flag any promoter whose dates haven't refreshed for over a week, so a quietly
+   broken source is visible here rather than only in the Actions log. */
+function health(d){
+  const days=w=>(Date.now()-Date.parse(w))/864e5;
+  const stale=Object.entries(d.lastSeen||{}).filter(([,w])=>days(w)>7)
+    .map(([p,w])=>`${p} (${Math.round(days(w))}d)`);
+  if(!stale.length&&!(d.staleSources||[]).length){$("health").innerHTML="";return;}
+  $("health").innerHTML=`<div class="health"><b>Check these dates against the promoter.</b>
+    Not refreshed recently: ${esc(stale.join(", ")||(d.staleSources||[]).join(", "))}.
+    Everything else on this page updated normally.</div>`;
 }
 
 /* Countries reflect the sport + promoter already chosen, so you can never
@@ -315,6 +352,9 @@ function buildGrid(){
   });
 }
 
+/* Announced within the last 7 days, per the scraper's firstSeen stamp. */
+const isNew=e=>e.firstSeen&&(Date.now()-Date.parse(e.firstSeen+"T00:00:00"))/864e5<=7;
+
 function relative(iso){
   const diff=Math.round((Date.parse(iso+"T00:00:00")-Date.parse(TODAY+"T00:00:00"))/864e5);
   if(diff<=0)return"today";
@@ -355,7 +395,7 @@ function buildList(){
       <article class="event" style="--c:${corner(e.sport)}">
         ${badge(e)}
         <div class="ebody">
-          <h3>${esc(e.title)}</h3>
+          <h3>${esc(e.title)}${isNew(e)?`<span class="isnew">New</span>`:""}</h3>
           <p class="bout">${esc(e.bout?.[0]||"TBA")}<span class="vs">vs</span>${esc(e.bout?.[1]||"TBA")}</p>
           <div class="meta">
             <span>${flag(e.country)} ${esc(e.venue)}${e.city?", "+esc(e.city):""}</span>

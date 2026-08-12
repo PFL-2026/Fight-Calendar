@@ -88,7 +88,8 @@
     ]
    ],
    "sources": [
-    "wikipedia:2026_in_Misfits_Boxing_and_MF_Pro"
+    "wikipedia:{year}_in_Misfits_Boxing_and_MF_Pro",
+    "wikipedia:{year}_in_Misfits_Boxing"
    ]
   },
   "MVP": {
@@ -130,7 +131,8 @@
     ]
    ],
    "sources": [
-    "wikipedia:List_of_UFC_events"
+    "wikipedia:List_of_UFC_events",
+    "wikipedia:{year}_in_UFC"
    ]
   },
   "PFL": {
@@ -149,7 +151,8 @@
     ]
    ],
    "sources": [
-    "wikipedia:2026_in_Professional_Fighters_League"
+    "wikipedia:{year}_in_Professional_Fighters_League",
+    "wikipedia:List_of_Professional_Fighters_League_events"
    ]
   },
   "ONE": {
@@ -168,7 +171,8 @@
     ]
    ],
    "sources": [
-    "wikipedia:List_of_ONE_Championship_events"
+    "wikipedia:List_of_ONE_Championship_events",
+    "wikipedia:{year}_in_ONE_Championship"
    ]
   },
   "Cage Warriors": {
@@ -188,7 +192,7 @@
    ],
    "sources": [
     "cagewarriors",
-    "wikipedia:2026_in_Cage_Warriors"
+    "wikipedia:{year}_in_Cage_Warriors"
    ]
   },
   "RIZIN": {
@@ -207,7 +211,8 @@
     ]
    ],
    "sources": [
-    "wikipedia:2026_in_Rizin_Fighting_Federation"
+    "wikipedia:{year}_in_Rizin_Fighting_Federation",
+    "wikipedia:List_of_Rizin_Fighting_Federation_events"
    ]
   },
   "Oktagon": {
@@ -231,7 +236,7 @@
    ],
    "sources": [
     "oktagon",
-    "wikipedia:2026_in_Oktagon_MMA"
+    "wikipedia:{year}_in_Oktagon_MMA"
    ]
   }
  },
@@ -1373,5 +1378,18 @@
   "Singapore": "🇸🇬",
   "New Zealand": "🇳🇿",
   "Sweden": "🇸🇪"
+ },
+ "lastSeen": {
+  "Queensberry": "2026-08-11",
+  "Matchroom": "2026-08-11",
+  "BOXXER": "2026-08-11",
+  "Misfits": "2026-08-11",
+  "MVP": "2026-08-11",
+  "UFC": "2026-08-11",
+  "PFL": "2026-08-11",
+  "ONE": "2026-08-11",
+  "Cage Warriors": "2026-08-11",
+  "RIZIN": "2026-08-11",
+  "Oktagon": "2026-08-11"
  }
 }
