@@ -125,14 +125,15 @@ and Praha. If something lands as `Other`, add the city to `CITIES` in `update.mj
 
 ## Promoter logos
 
-Nine are in place — Queensberry, Matchroom, Misfits, MVP, PFL, ONE, Cage Warriors, RIZIN and
-Oktagon — each rendered as a flat white silhouette so it reads on the dark badge tile.
-**BOXXER and UFC** fall back to their typographic badge until artwork is added.
+Ten are in place — Queensberry, Matchroom, Misfits, MVP, UFC, PFL, ONE, Cage Warriors, RIZIN and
+Oktagon — each rendered as a flat white mark so it reads on the dark badge tile. UFC is true
+vector (`ufc.svg`) so it stays sharp at any size; the rest are 512px PNGs from raster sources.
+**BOXXER** falls back to its typographic badge (`BXR`) until artwork is added.
 
 To add or replace one, drop a file in `logos/` named after the promoter's `slug` in `data.json`:
 
 ```
-logos/boxxer.png     logos/ufc.png     (.svg also works and is preferred)
+logos/boxxer.svg     (.svg preferred — sharper and smaller; .png also works)
 ```
 
 It's picked up on the next load with no code change. Transparent background, light or
